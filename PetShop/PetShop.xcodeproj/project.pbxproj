@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44BDB7B85C8540B6D67A1B23 /* Pods_PetShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD21E02E4C8CA168790E13ED /* Pods_PetShop.framework */; };
 		7C6A3EE822AD474900B6AA8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EE722AD474900B6AA8F /* AppDelegate.swift */; };
 		7C6A3EEA22AD474900B6AA8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EE922AD474900B6AA8F /* ViewController.swift */; };
 		7C6A3EED22AD474900B6AA8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A3EEB22AD474900B6AA8F /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 		7C6A3F0022AD474C00B6AA8F /* PetShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EFF22AD474C00B6AA8F /* PetShopTests.swift */; };
 		7C6A3F0B22AD474C00B6AA8F /* PetShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3F0A22AD474C00B6AA8F /* PetShopUITests.swift */; };
 		7C6A3F1A22AD4B1500B6AA8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3F1922AD4B1500B6AA8F /* LoginViewController.swift */; };
+		7C9E0DB322B47D4600B25DE5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		7C6A3F0A22AD474C00B6AA8F /* PetShopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetShopUITests.swift; sourceTree = "<group>"; };
 		7C6A3F0C22AD474C00B6AA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C6A3F1922AD4B1500B6AA8F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A43DBFE9E36583F6A568740B /* Pods-PetShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetShop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetShop/Pods-PetShop.debug.xcconfig"; sourceTree = "<group>"; };
+		D7C720F8E93C9C3D9B9B435A /* Pods-PetShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetShop.release.xcconfig"; path = "Pods/Target Support Files/Pods-PetShop/Pods-PetShop.release.xcconfig"; sourceTree = "<group>"; };
+		FD21E02E4C8CA168790E13ED /* Pods_PetShop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BDB7B85C8540B6D67A1B23 /* Pods_PetShop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,11 +85,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C4FF7CF22AD6BDE00018559 /* New Group */ = {
+		7C4FF7CF22AD6BDE00018559 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */,
 			);
-			path = "New Group";
+			path = Home;
 			sourceTree = "<group>";
 		};
 		7C6A3EDB22AD474900B6AA8F = {
@@ -92,6 +100,8 @@
 				7C6A3EFE22AD474C00B6AA8F /* PetShopTests */,
 				7C6A3F0922AD474C00B6AA8F /* PetShopUITests */,
 				7C6A3EE522AD474900B6AA8F /* Products */,
+				DEBB38004FC351D8FF66ABD6 /* Pods */,
+				AA808E3D0FE97762617B6746 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,7 +118,7 @@
 		7C6A3EE622AD474900B6AA8F /* PetShop */ = {
 			isa = PBXGroup;
 			children = (
-				7C4FF7CF22AD6BDE00018559 /* New Group */,
+				7C4FF7CF22AD6BDE00018559 /* Home */,
 				7C6A3F1822AD4AA200B6AA8F /* Login */,
 				7C6A3EE722AD474900B6AA8F /* AppDelegate.swift */,
 				7C6A3EE922AD474900B6AA8F /* ViewController.swift */,
@@ -147,6 +157,23 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		AA808E3D0FE97762617B6746 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD21E02E4C8CA168790E13ED /* Pods_PetShop.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEBB38004FC351D8FF66ABD6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A43DBFE9E36583F6A568740B /* Pods-PetShop.debug.xcconfig */,
+				D7C720F8E93C9C3D9B9B435A /* Pods-PetShop.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -154,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C6A3F0F22AD474C00B6AA8F /* Build configuration list for PBXNativeTarget "PetShop" */;
 			buildPhases = (
+				2D0B4B44225AFEAF808A3358 /* [CP] Check Pods Manifest.lock */,
 				7C6A3EE022AD474900B6AA8F /* Sources */,
 				7C6A3EE122AD474900B6AA8F /* Frameworks */,
 				7C6A3EE222AD474900B6AA8F /* Resources */,
+				6430E067824BDA4DF09D915C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,11 +302,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D0B4B44225AFEAF808A3358 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetShop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6430E067824BDA4DF09D915C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PetShop/Pods-PetShop-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PetShop/Pods-PetShop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C6A3EE022AD474900B6AA8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C9E0DB322B47D4600B25DE5 /* HomeViewController.swift in Sources */,
 				7C6A3F1A22AD4B1500B6AA8F /* LoginViewController.swift in Sources */,
 				7C6A3EEA22AD474900B6AA8F /* ViewController.swift in Sources */,
 				7C6A3EF022AD474900B6AA8F /* PetShop.xcdatamodeld in Sources */,
@@ -454,6 +531,7 @@
 		};
 		7C6A3F1022AD474C00B6AA8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A43DBFE9E36583F6A568740B /* Pods-PetShop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +549,7 @@
 		};
 		7C6A3F1122AD474C00B6AA8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7C720F8E93C9C3D9B9B435A /* Pods-PetShop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
