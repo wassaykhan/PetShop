@@ -31,15 +31,15 @@ class ShopCategoryFourViewController: UIViewController,UICollectionViewDelegate,
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		//iphone X XS
 		if UIScreen.main.nativeBounds.height == 2436 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}//2688 iphone XS_Max
 		if UIScreen.main.nativeBounds.height == 2688 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}//1792 iphone XR
 		if UIScreen.main.nativeBounds.height == 1792 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}
-		return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/3)
+		return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/3 - 40)
 	}
 	
 	@IBAction func btnBackAction(_ sender: Any) {

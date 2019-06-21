@@ -20,11 +20,22 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
     
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 6
+		return 4
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		
 		let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+		if indexPath.row == 1 {
+			cellCategory.lbProd.text = "Food"
+			cellCategory.imgProd.image = UIImage(named: "food")
+		}else if indexPath.row == 2 {
+			cellCategory.lbProd.text = "Treats"
+			cellCategory.imgProd.image = UIImage(named: "treats")
+		}else if indexPath.row == 3 {
+			cellCategory.lbProd.text = "Toys"
+			cellCategory.imgProd.image = UIImage(named: "toys")
+		}
 		return cellCategory
 	}
 	

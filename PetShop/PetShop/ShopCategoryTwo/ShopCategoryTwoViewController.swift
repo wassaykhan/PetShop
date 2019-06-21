@@ -25,21 +25,40 @@ class ShopCategoryTwoViewController: UIViewController,UICollectionViewDelegate,U
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+		if indexPath.row == 0 {
+			cellCategory.lbProd.text = "Healthcare"
+			cellCategory.imgProd.image = UIImage(named: "vitamins-supplyment")
+		}else if indexPath.row == 1 {
+			cellCategory.lbProd.text = "Dental Care"
+			cellCategory.imgProd.image = UIImage(named: "dental-care")
+		}else if indexPath.row == 2 {
+			cellCategory.lbProd.text = "Vitamins and Supplements"
+			cellCategory.imgProd.image = UIImage(named: "vitamins-and-supplyments")
+		}else if indexPath.row == 3 {
+			cellCategory.lbProd.text = "Cleaning Potty"
+			cellCategory.imgProd.image = UIImage(named: "clean-potty")
+		}else if indexPath.row == 4 {
+			cellCategory.lbProd.text = "Vitamins and Supplements"
+			cellCategory.imgProd.image = UIImage(named: "vitamins-supplyment")
+		}else if indexPath.row == 5 {
+			cellCategory.lbProd.text = "Cleaning Potty"
+			cellCategory.imgProd.image = UIImage(named: "clean-potty")
+		}
 		return cellCategory
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		//iphone X XS
 		if UIScreen.main.nativeBounds.height == 2436 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}//2688 iphone XS_Max
 		if UIScreen.main.nativeBounds.height == 2688 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}//1792 iphone XR
 		if UIScreen.main.nativeBounds.height == 1792 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
 		}
-		return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/3)
+		return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/3 - 40)
 	}
 	
 	@IBAction func btnBackAction(_ sender: Any) {

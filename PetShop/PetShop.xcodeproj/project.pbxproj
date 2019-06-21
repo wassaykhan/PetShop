@@ -17,12 +17,16 @@
 		7C6A3F0022AD474C00B6AA8F /* PetShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EFF22AD474C00B6AA8F /* PetShopTests.swift */; };
 		7C6A3F0B22AD474C00B6AA8F /* PetShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3F0A22AD474C00B6AA8F /* PetShopUITests.swift */; };
 		7C6A3F1A22AD4B1500B6AA8F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3F1922AD4B1500B6AA8F /* LoginViewController.swift */; };
+		7C716E0B22BC5FF700F1737E /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C716E0A22BC5FF700F1737E /* SortViewController.swift */; };
 		7C7E554222BA803700387DCD /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E554122BA803700387DCD /* AddAddressViewController.swift */; };
 		7C7E554522BA808C00387DCD /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E554422BA808C00387DCD /* ForgotPasswordViewController.swift */; };
 		7C7E554822BA810F00387DCD /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E554722BA810F00387DCD /* MyAccountViewController.swift */; };
 		7C7E554B22BA815400387DCD /* ShippingAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E554A22BA815400387DCD /* ShippingAddressViewController.swift */; };
 		7C7E554E22BA827400387DCD /* NewArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E554D22BA827400387DCD /* NewArrivalsViewController.swift */; };
 		7C7E555122BA8F9800387DCD /* ArrivalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E555022BA8F9800387DCD /* ArrivalsTableViewCell.swift */; };
+		7C867DC922BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C867DC822BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift */; };
+		7C867DCC22BBDAEE00CD42A4 /* BrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C867DCB22BBDAEE00CD42A4 /* BrandViewController.swift */; };
+		7C867DCF22BBDB7700CD42A4 /* BrandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C867DCE22BBDB7700CD42A4 /* BrandTableViewCell.swift */; };
 		7C8ACDB022B96FB700D0BA2B /* ShopCategoryOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8ACDAF22B96FB700D0BA2B /* ShopCategoryOneViewController.swift */; };
 		7C8ACDB322B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8ACDB222B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift */; };
 		7C8BC59222BB0E7E00ADAC91 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8BC59122BB0E7E00ADAC91 /* EditProfileViewController.swift */; };
@@ -71,12 +75,16 @@
 		7C6A3F0A22AD474C00B6AA8F /* PetShopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetShopUITests.swift; sourceTree = "<group>"; };
 		7C6A3F0C22AD474C00B6AA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C6A3F1922AD4B1500B6AA8F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7C716E0A22BC5FF700F1737E /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		7C7E554122BA803700387DCD /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		7C7E554422BA808C00387DCD /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		7C7E554722BA810F00387DCD /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		7C7E554A22BA815400387DCD /* ShippingAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingAddressViewController.swift; sourceTree = "<group>"; };
 		7C7E554D22BA827400387DCD /* NewArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewArrivalsViewController.swift; sourceTree = "<group>"; };
 		7C7E555022BA8F9800387DCD /* ArrivalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsTableViewCell.swift; sourceTree = "<group>"; };
+		7C867DC822BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailPTableViewCell.swift; sourceTree = "<group>"; };
+		7C867DCB22BBDAEE00CD42A4 /* BrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandViewController.swift; sourceTree = "<group>"; };
+		7C867DCE22BBDB7700CD42A4 /* BrandTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandTableViewCell.swift; sourceTree = "<group>"; };
 		7C8ACDAF22B96FB700D0BA2B /* ShopCategoryOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryOneViewController.swift; sourceTree = "<group>"; };
 		7C8ACDB222B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8BC59122BB0E7E00ADAC91 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +162,8 @@
 		7C6A3EE622AD474900B6AA8F /* PetShop */ = {
 			isa = PBXGroup;
 			children = (
+				7C716E0922BC5FDF00F1737E /* Sort */,
+				7C867DCA22BBDA7500CD42A4 /* Brand */,
 				7C8BC59322BB112100ADAC91 /* Order Detail */,
 				7C8BC59022BB0E3900ADAC91 /* Edit Profile */,
 				7C7E554C22BA825400387DCD /* New Arrivals */,
@@ -207,6 +217,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		7C716E0922BC5FDF00F1737E /* Sort */ = {
+			isa = PBXGroup;
+			children = (
+				7C716E0A22BC5FF700F1737E /* SortViewController.swift */,
+			);
+			path = Sort;
+			sourceTree = "<group>";
+		};
 		7C7E554022BA800000387DCD /* Add Address */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +274,31 @@
 			path = "Arrivals Cell";
 			sourceTree = "<group>";
 		};
+		7C867DC722BBD09300CD42A4 /* Order Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C867DC822BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift */,
+			);
+			path = "Order Cell";
+			sourceTree = "<group>";
+		};
+		7C867DCA22BBDA7500CD42A4 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				7C867DCD22BBDB4F00CD42A4 /* Brand Cell */,
+				7C867DCB22BBDAEE00CD42A4 /* BrandViewController.swift */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
+		7C867DCD22BBDB4F00CD42A4 /* Brand Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C867DCE22BBDB7700CD42A4 /* BrandTableViewCell.swift */,
+			);
+			path = "Brand Cell";
+			sourceTree = "<group>";
+		};
 		7C8ACDAE22B96F8D00D0BA2B /* ShopCategoryOne */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +327,7 @@
 		7C8BC59322BB112100ADAC91 /* Order Detail */ = {
 			isa = PBXGroup;
 			children = (
+				7C867DC722BBD09300CD42A4 /* Order Cell */,
 				7C8BC59422BB113600ADAC91 /* OrderDetailViewController.swift */,
 			);
 			path = "Order Detail";
@@ -557,16 +601,20 @@
 				7C9E0DB322B47D4600B25DE5 /* HomeViewController.swift in Sources */,
 				7C6A3F1A22AD4B1500B6AA8F /* LoginViewController.swift in Sources */,
 				7CDD68E222B99AEB00B04FAB /* ProductViewController.swift in Sources */,
+				7C867DCC22BBDAEE00CD42A4 /* BrandViewController.swift in Sources */,
 				7CDD68E522B99E5300B04FAB /* CartViewController.swift in Sources */,
 				7C6A3EEA22AD474900B6AA8F /* ViewController.swift in Sources */,
 				7CDD68DC22B987F200B04FAB /* ShopCategoryThreeViewController.swift in Sources */,
 				7C7E554222BA803700387DCD /* AddAddressViewController.swift in Sources */,
 				7C7E554822BA810F00387DCD /* MyAccountViewController.swift in Sources */,
+				7C716E0B22BC5FF700F1737E /* SortViewController.swift in Sources */,
 				7C7E555122BA8F9800387DCD /* ArrivalsTableViewCell.swift in Sources */,
 				7C8BC59522BB113600ADAC91 /* OrderDetailViewController.swift in Sources */,
+				7C867DC922BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift in Sources */,
 				7C8ACDB022B96FB700D0BA2B /* ShopCategoryOneViewController.swift in Sources */,
 				7C7E554B22BA815400387DCD /* ShippingAddressViewController.swift in Sources */,
 				7C6A3EF022AD474900B6AA8F /* PetShop.xcdatamodeld in Sources */,
+				7C867DCF22BBDB7700CD42A4 /* BrandTableViewCell.swift in Sources */,
 				7CDD68E822B99F8500B04FAB /* CartTableViewCell.swift in Sources */,
 				7C7E554522BA808C00387DCD /* ForgotPasswordViewController.swift in Sources */,
 				7CDD68EE22B9C53E00B04FAB /* ReviewOrderTableViewCell.swift in Sources */,

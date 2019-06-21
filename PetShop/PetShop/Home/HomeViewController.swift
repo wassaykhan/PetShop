@@ -32,8 +32,8 @@ class HomeViewController: UIViewController {
 //		let localSource = [UIImage(named: "Group 25 copy")]
 //		let localSource = [BundleImageSource(imageString: "kingfisher"), BundleImageSource(imageString: "624848-PNY8BB-710"), BundleImageSource(imageString: "goldfish")]
 		// can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
-		slideshow.setImageInputs([ImageSource(image: UIImage(named: "goldfish")!),
-								  ImageSource(image: UIImage(named: "kingfisher")!)])
+		slideshow.setImageInputs([ImageSource(image: UIImage(named: "petImg")!),
+								  ImageSource(image: UIImage(named: "petImg1")!)])
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
 		slideshow.addGestureRecognizer(recognizer)

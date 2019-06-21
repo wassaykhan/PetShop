@@ -1,31 +1,27 @@
 //
-//  LoginViewController.swift
+//  SortViewController.swift
 //  PetShop
 //
-//  Created by Wassay Khan on 09/06/2019.
+//  Created by Wassay Khan on 21/06/2019.
 //  Copyright © 2019 Wassay Khan. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class SortViewController: UIViewController {
 
-	@IBOutlet weak var viewSignIn: UIView!
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-	@IBAction func btnBackAction(_ sender: Any) {
+	@IBAction func btnDoneAction(_ sender: Any) {
 		self.navigationController?.popViewController(animated: true)
 	}
 	
-	@IBAction func btnSignInAction(_ sender: Any) {
-		self.viewSignIn.isHidden = false
-	}
-	@IBAction func btnCreateAccountAction(_ sender: Any) {
-		self.viewSignIn.isHidden = true
+	@IBAction func btnBackAction(_ sender: Any) {
+		self.navigationController?.popViewController(animated: true)
 	}
 	/*
     // MARK: - Navigation
