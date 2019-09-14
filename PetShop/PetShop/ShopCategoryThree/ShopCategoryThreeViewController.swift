@@ -25,6 +25,25 @@ class ShopCategoryThreeViewController: UIViewController,UICollectionViewDelegate
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+		if indexPath.row == 0 {
+			cellCategory.lbProd.text = "Dry Food"
+			cellCategory.imgProd.image = UIImage(named: "cat-1")
+		}else if indexPath.row == 1 {
+			cellCategory.lbProd.text = "Wet Food"
+			cellCategory.imgProd.image = UIImage(named: "cat-2")
+		}else if indexPath.row == 2 {
+			cellCategory.lbProd.text = "Prescription Food"
+			cellCategory.imgProd.image = UIImage(named: "cat-3")
+		}else if indexPath.row == 3 {
+			cellCategory.lbProd.text = "Cleaning Potty"
+			cellCategory.imgProd.image = UIImage(named: "cat-4")
+		}else if indexPath.row == 4 {
+			cellCategory.lbProd.text = "Vitamins"
+			cellCategory.imgProd.image = UIImage(named: "cat-5")
+		}else if indexPath.row == 5 {
+			cellCategory.lbProd.text = "Cleaning Potty"
+			cellCategory.imgProd.image = UIImage(named: "cat-1")
+		}
 		return cellCategory
 	}
 	

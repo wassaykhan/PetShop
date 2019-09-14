@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44BDB7B85C8540B6D67A1B23 /* Pods_PetShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD21E02E4C8CA168790E13ED /* Pods_PetShop.framework */; };
+		7C488C3422C576A200FCF6DF /* LatestProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C488C3322C576A200FCF6DF /* LatestProductCollectionViewCell.swift */; };
+		7C63EEE322C4CC2300A244FD /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C63EEE222C4CC2300A244FD /* WishlistViewController.swift */; };
+		7C63EEE622C4CF0F00A244FD /* WishlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C63EEE522C4CF0F00A244FD /* WishlistTableViewCell.swift */; };
 		7C6A3EE822AD474900B6AA8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EE722AD474900B6AA8F /* AppDelegate.swift */; };
 		7C6A3EEA22AD474900B6AA8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A3EE922AD474900B6AA8F /* ViewController.swift */; };
 		7C6A3EED22AD474900B6AA8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A3EEB22AD474900B6AA8F /* Main.storyboard */; };
@@ -31,7 +34,13 @@
 		7C8ACDB322B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8ACDB222B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift */; };
 		7C8BC59222BB0E7E00ADAC91 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8BC59122BB0E7E00ADAC91 /* EditProfileViewController.swift */; };
 		7C8BC59522BB113600ADAC91 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8BC59422BB113600ADAC91 /* OrderDetailViewController.swift */; };
+		7C9D466922C41A7800B5E8A3 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9D466822C41A7800B5E8A3 /* OrdersViewController.swift */; };
+		7C9D466C22C41AC400B5E8A3 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9D466B22C41AC400B5E8A3 /* OrdersTableViewCell.swift */; };
 		7C9E0DB322B47D4600B25DE5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */; };
+		7CC8EF80232992260039A19A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8EF7F232992260039A19A /* Reachability.swift */; };
+		7CC8EF83232993D70039A19A /* RestAPIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8EF82232993D70039A19A /* RestAPIConstant.swift */; };
+		7CC8EF85232996D90039A19A /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8EF84232996D90039A19A /* AppConstant.swift */; };
+		7CC8EF8B2329A4C90039A19A /* AlamofireCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8EF8A2329A4C90039A19A /* AlamofireCalls.swift */; };
 		7CDD68D922B987CB00B04FAB /* ShopCategoryTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD68D822B987CB00B04FAB /* ShopCategoryTwoViewController.swift */; };
 		7CDD68DC22B987F200B04FAB /* ShopCategoryThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD68DB22B987F200B04FAB /* ShopCategoryThreeViewController.swift */; };
 		7CDD68DF22B9882000B04FAB /* ShopCategoryFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD68DE22B9882000B04FAB /* ShopCategoryFourViewController.swift */; };
@@ -60,6 +69,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C488C3322C576A200FCF6DF /* LatestProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C63EEE222C4CC2300A244FD /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
+		7C63EEE522C4CF0F00A244FD /* WishlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistTableViewCell.swift; sourceTree = "<group>"; };
 		7C6A3EE422AD474900B6AA8F /* PetShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6A3EE722AD474900B6AA8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C6A3EE922AD474900B6AA8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +101,13 @@
 		7C8ACDB222B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8BC59122BB0E7E00ADAC91 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7C8BC59422BB113600ADAC91 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		7C9D466822C41A7800B5E8A3 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		7C9D466B22C41AC400B5E8A3 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
 		7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7CC8EF7F232992260039A19A /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		7CC8EF82232993D70039A19A /* RestAPIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIConstant.swift; sourceTree = "<group>"; };
+		7CC8EF84232996D90039A19A /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		7CC8EF8A2329A4C90039A19A /* AlamofireCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireCalls.swift; sourceTree = "<group>"; };
 		7CDD68D822B987CB00B04FAB /* ShopCategoryTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryTwoViewController.swift; sourceTree = "<group>"; };
 		7CDD68DB22B987F200B04FAB /* ShopCategoryThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryThreeViewController.swift; sourceTree = "<group>"; };
 		7CDD68DE22B9882000B04FAB /* ShopCategoryFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryFourViewController.swift; sourceTree = "<group>"; };
@@ -129,12 +147,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C488C3222C5764000FCF6DF /* LatestProduct */ = {
+			isa = PBXGroup;
+			children = (
+				7C488C3322C576A200FCF6DF /* LatestProductCollectionViewCell.swift */,
+			);
+			path = LatestProduct;
+			sourceTree = "<group>";
+		};
 		7C4FF7CF22AD6BDE00018559 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7C488C3222C5764000FCF6DF /* LatestProduct */,
 				7C9E0DB222B47D4600B25DE5 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		7C63EEE122C4CC0400A244FD /* Wishlist */ = {
+			isa = PBXGroup;
+			children = (
+				7C63EEE422C4CEEE00A244FD /* Wishlist Cell */,
+				7C63EEE222C4CC2300A244FD /* WishlistViewController.swift */,
+			);
+			path = Wishlist;
+			sourceTree = "<group>";
+		};
+		7C63EEE422C4CEEE00A244FD /* Wishlist Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C63EEE522C4CF0F00A244FD /* WishlistTableViewCell.swift */,
+			);
+			path = "Wishlist Cell";
 			sourceTree = "<group>";
 		};
 		7C6A3EDB22AD474900B6AA8F = {
@@ -162,6 +206,10 @@
 		7C6A3EE622AD474900B6AA8F /* PetShop */ = {
 			isa = PBXGroup;
 			children = (
+				7CC8EF862329A3660039A19A /* Model */,
+				7CC8EF7D232991B70039A19A /* Utilities */,
+				7C63EEE122C4CC0400A244FD /* Wishlist */,
+				7C9D466722C41A6200B5E8A3 /* Orders */,
 				7C716E0922BC5FDF00F1737E /* Sort */,
 				7C867DCA22BBDA7500CD42A4 /* Brand */,
 				7C8BC59322BB112100ADAC91 /* Order Detail */,
@@ -215,6 +263,13 @@
 				7C6A3F1922AD4B1500B6AA8F /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		7C6CE423232CC88300F277D6 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Slider;
 			sourceTree = "<group>";
 		};
 		7C716E0922BC5FDF00F1737E /* Sort */ = {
@@ -331,6 +386,66 @@
 				7C8BC59422BB113600ADAC91 /* OrderDetailViewController.swift */,
 			);
 			path = "Order Detail";
+			sourceTree = "<group>";
+		};
+		7C9D466722C41A6200B5E8A3 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				7C9D466A22C41AAB00B5E8A3 /* Orders Cell */,
+				7C9D466822C41A7800B5E8A3 /* OrdersViewController.swift */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		7C9D466A22C41AAB00B5E8A3 /* Orders Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C9D466B22C41AC400B5E8A3 /* OrdersTableViewCell.swift */,
+			);
+			path = "Orders Cell";
+			sourceTree = "<group>";
+		};
+		7CC8EF7D232991B70039A19A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8EF872329A3910039A19A /* Calls */,
+				7CC8EF81232993A70039A19A /* Constant */,
+				7CC8EF7E232991D20039A19A /* Reachability */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7CC8EF7E232991D20039A19A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8EF7F232992260039A19A /* Reachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		7CC8EF81232993A70039A19A /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8EF82232993D70039A19A /* RestAPIConstant.swift */,
+				7CC8EF84232996D90039A19A /* AppConstant.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		7CC8EF862329A3660039A19A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7C6CE423232CC88300F277D6 /* Slider */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7CC8EF872329A3910039A19A /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8EF8A2329A4C90039A19A /* AlamofireCalls.swift */,
+			);
+			path = Calls;
 			sourceTree = "<group>";
 		};
 		7CDD68D722B987AD00B04FAB /* ShopCategoryTwo */ = {
@@ -576,13 +691,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PetShop/Pods-PetShop-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -599,9 +720,12 @@
 				7C8BC59222BB0E7E00ADAC91 /* EditProfileViewController.swift in Sources */,
 				7CDD68DF22B9882000B04FAB /* ShopCategoryFourViewController.swift in Sources */,
 				7C9E0DB322B47D4600B25DE5 /* HomeViewController.swift in Sources */,
+				7C9D466922C41A7800B5E8A3 /* OrdersViewController.swift in Sources */,
 				7C6A3F1A22AD4B1500B6AA8F /* LoginViewController.swift in Sources */,
 				7CDD68E222B99AEB00B04FAB /* ProductViewController.swift in Sources */,
+				7CC8EF8B2329A4C90039A19A /* AlamofireCalls.swift in Sources */,
 				7C867DCC22BBDAEE00CD42A4 /* BrandViewController.swift in Sources */,
+				7C63EEE322C4CC2300A244FD /* WishlistViewController.swift in Sources */,
 				7CDD68E522B99E5300B04FAB /* CartViewController.swift in Sources */,
 				7C6A3EEA22AD474900B6AA8F /* ViewController.swift in Sources */,
 				7CDD68DC22B987F200B04FAB /* ShopCategoryThreeViewController.swift in Sources */,
@@ -610,18 +734,24 @@
 				7C716E0B22BC5FF700F1737E /* SortViewController.swift in Sources */,
 				7C7E555122BA8F9800387DCD /* ArrivalsTableViewCell.swift in Sources */,
 				7C8BC59522BB113600ADAC91 /* OrderDetailViewController.swift in Sources */,
+				7CC8EF85232996D90039A19A /* AppConstant.swift in Sources */,
 				7C867DC922BBD0BE00CD42A4 /* OrderDetailPTableViewCell.swift in Sources */,
 				7C8ACDB022B96FB700D0BA2B /* ShopCategoryOneViewController.swift in Sources */,
+				7C9D466C22C41AC400B5E8A3 /* OrdersTableViewCell.swift in Sources */,
 				7C7E554B22BA815400387DCD /* ShippingAddressViewController.swift in Sources */,
 				7C6A3EF022AD474900B6AA8F /* PetShop.xcdatamodeld in Sources */,
+				7C488C3422C576A200FCF6DF /* LatestProductCollectionViewCell.swift in Sources */,
 				7C867DCF22BBDB7700CD42A4 /* BrandTableViewCell.swift in Sources */,
 				7CDD68E822B99F8500B04FAB /* CartTableViewCell.swift in Sources */,
 				7C7E554522BA808C00387DCD /* ForgotPasswordViewController.swift in Sources */,
 				7CDD68EE22B9C53E00B04FAB /* ReviewOrderTableViewCell.swift in Sources */,
 				7C6A3EE822AD474900B6AA8F /* AppDelegate.swift in Sources */,
+				7C63EEE622C4CF0F00A244FD /* WishlistTableViewCell.swift in Sources */,
 				7C8ACDB322B9711900D0BA2B /* ShopCategoryCollectionViewCell.swift in Sources */,
+				7CC8EF80232992260039A19A /* Reachability.swift in Sources */,
 				7CDD68D922B987CB00B04FAB /* ShopCategoryTwoViewController.swift in Sources */,
 				7CDD68EB22B9C4FA00B04FAB /* ReviewOrderViewController.swift in Sources */,
+				7CC8EF83232993D70039A19A /* RestAPIConstant.swift in Sources */,
 				7C7E554E22BA827400387DCD /* NewArrivalsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,7 +839,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Silicon Graphics (74B3D25UJJ)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -770,7 +900,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Silicon Graphics (74B3D25UJJ)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -798,14 +928,17 @@
 			baseConfigurationReference = A43DBFE9E36583F6A568740B /* Pods-PetShop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Silicon Graphics (74B3D25UJJ)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 74B3D25UJJ;
 				INFOPLIST_FILE = PetShop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.netpace.PetShop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.silicongraphics.petshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = petshopProvisionalProfile;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -816,14 +949,17 @@
 			baseConfigurationReference = D7C720F8E93C9C3D9B9B435A /* Pods-PetShop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Silicon Graphics (74B3D25UJJ)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 74B3D25UJJ;
 				INFOPLIST_FILE = PetShop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.netpace.PetShop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.silicongraphics.petshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = petshopProvisionalProfile;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -8,9 +8,15 @@
 
 import UIKit
 import ImageSlideshow
+import Alamofire
+import SVProgressHUD
 
-class HomeViewController: UIViewController {
 
+class HomeViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+
+	@IBOutlet weak var latestProdCollectionView: UICollectionView!
+	@IBOutlet weak var categoryCollectionView: UICollectionView!
+	
 	@IBOutlet weak var slideshow: ImageSlideshow!
 	@IBOutlet weak var viewSearch: UIView!
 	override func viewDidLoad() {
@@ -27,18 +33,19 @@ class HomeViewController: UIViewController {
 		
 		// optional way to show activity indicator during image load (skipping the line will show no activity indicator)
 		slideshow.activityIndicator = DefaultActivityIndicator()
-//		self.slideshow.delegate = self
 		
-//		let localSource = [UIImage(named: "Group 25 copy")]
-//		let localSource = [BundleImageSource(imageString: "kingfisher"), BundleImageSource(imageString: "624848-PNY8BB-710"), BundleImageSource(imageString: "goldfish")]
-		// can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
 		slideshow.setImageInputs([ImageSource(image: UIImage(named: "petImg")!),
 								  ImageSource(image: UIImage(named: "petImg1")!)])
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
 		slideshow.addGestureRecognizer(recognizer)
-        // Do any additional setup after loading the view.
+		
+//		self.getToken()
+		self.getSlider()
+		
+		// Do any additional setup after loading the view.
     }
+	
 	
 	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .portrait
@@ -49,15 +56,67 @@ class HomeViewController: UIViewController {
 		// set the activity indicator for full screen controller (skipping the line will show no activity indicator)
 		fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
 	}
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == self.categoryCollectionView {
+			return 6
+		}
+		return 7
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		
+		if collectionView == self.categoryCollectionView  {
+			let cellCategory:ShopCategoryCollectionViewCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+			return cellCategory
+			//categoryCellIdentifier
+		}
+		
+		let cellCategory:LatestProductCollectionViewCell = latestProdCollectionView.dequeueReusableCell(withReuseIdentifier: "latestProdCellIdentifier", for: indexPath) as! LatestProductCollectionViewCell
+		return cellCategory
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: 170, height: 195)
+	}
+	
+	func getToken() {
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PToken
+			
+			let parameters:[String:String] = ["username":"tarun","password":"admin1234"]
+			AlamofireCalls.postCall(urlString: urlString, parameters: parameters)
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	func getSlider(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PSlider
+			let parameters:[String:String] = [:]
+			let headers:[String:String] = ["Authorization": "Bearer v8alp9psbs80f9ibthhy0idxx0dcpr18",
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				print(success)
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
 
 }
 

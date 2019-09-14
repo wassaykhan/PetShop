@@ -20,19 +20,30 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
     
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 4
+		return 5
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+		if indexPath.row == 0 {
+			let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryLongCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+			return cellCategory
+		}
+		
+		
 		if indexPath.row == 1 {
+			let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryAZCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+			return cellCategory
+		}
+		
+		let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+		if indexPath.row == 2 {
 			cellCategory.lbProd.text = "Food"
 			cellCategory.imgProd.image = UIImage(named: "food")
-		}else if indexPath.row == 2 {
+		}else if indexPath.row == 3 {
 			cellCategory.lbProd.text = "Treats"
 			cellCategory.imgProd.image = UIImage(named: "treats")
-		}else if indexPath.row == 3 {
+		}else if indexPath.row == 4 {
 			cellCategory.lbProd.text = "Toys"
 			cellCategory.imgProd.image = UIImage(named: "toys")
 		}
@@ -40,24 +51,33 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		
+		if indexPath.row == 0 {
+			return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/4 - 40)
+		}
+		
 		//iphone X XS
 		if UIScreen.main.nativeBounds.height == 2436 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
+			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 40)
 		}//2688 iphone XS_Max
 		if UIScreen.main.nativeBounds.height == 2688 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
+			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 40)
 		}//1792 iphone XR
 		if UIScreen.main.nativeBounds.height == 1792 {
-			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 40)
+			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 40)
 		}
-		return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/3 - 40)
+		return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/3 - 40)
 	}
 	
 	
 	@IBAction func btnBackAction(_ sender: Any) {
 		self.navigationController?.popViewController(animated: true)
 	}
-	//	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//		if indexPath.row == 0 {
+//			
+//		}
+//	}
 	
     /*
     // MARK: - Navigation
