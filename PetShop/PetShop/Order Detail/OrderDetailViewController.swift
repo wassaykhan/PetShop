@@ -11,14 +11,27 @@ import UIKit
 class OrderDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 	@IBOutlet weak var orderTableView: UITableView!
+	@IBOutlet weak var lbOrderID: UILabel!
+	@IBOutlet weak var lbOrderStatus: UILabel!
+	@IBOutlet weak var lbOrderItemSubTotal: UILabel!
+	@IBOutlet weak var lbOrderShippingRate: UILabel!
+	@IBOutlet weak var lbOrderTotal: UILabel!
+	
+	var orderItemArray:Array<OrderItems> = []
+	var orderCompleteData:OrderDetail?
+	
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
-
+		self.lbOrderID.text = orderCompleteData?.incrementID
+		self.lbOrderTotal.text = String(format: "AED %.2f", (self.orderCompleteData?.grandTotal)!)
+		self.lbOrderStatus.text = orderCompleteData?.status
+		self.lbOrderItemSubTotal.text = String(format: "AED %.2f", (self.orderCompleteData?.grandTotal)!)
         // Do any additional setup after loading the view.
     }
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 3
+		return orderItemArray.count
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -28,6 +41,13 @@ class OrderDetailViewController: UIViewController,UITableViewDelegate,UITableVie
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cellOrder:OrderDetailPTableViewCell = tableView.dequeueReusableCell(withIdentifier: "orderDetailCellIdentifier", for: indexPath) as! OrderDetailPTableViewCell
+		cellOrder.lbName.text = self.orderItemArray[indexPath.row].name
+		if self.orderItemArray[indexPath.row].weight != nil {
+			cellOrder.lbSize.titleLabel?.text = String(format: "%.2f", self.orderItemArray[indexPath.row].weight!)
+		}
+		
+		cellOrder.lbPrice.text = String(format: "AED %.2f", self.orderItemArray[indexPath.row].price!)
+		cellOrder.lbQuantity.titleLabel?.text = String(format: "%.2f", self.orderItemArray[indexPath.row].quantity!)
 		return cellOrder
 	}
 	

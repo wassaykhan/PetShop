@@ -12,4 +12,6 @@ class ShopCategoryCollectionViewCell: UICollectionViewCell {
     
 	@IBOutlet weak var imgProd: UIImageView!
 	@IBOutlet weak var lbProd: UILabel!
+	
+	
 }

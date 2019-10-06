@@ -10,15 +10,21 @@ import UIKit
 import ImageSlideshow
 import Alamofire
 import SVProgressHUD
-
+import SDWebImage
 
 class HomeViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
 	@IBOutlet weak var latestProdCollectionView: UICollectionView!
 	@IBOutlet weak var categoryCollectionView: UICollectionView!
+	@IBOutlet weak var txtSearch: UITextField!
 	
 	@IBOutlet weak var slideshow: ImageSlideshow!
 	@IBOutlet weak var viewSearch: UIView!
+	
+	var sliderArr:Array<Slider> = []
+	var petCategories:Array<PetCategories> = []
+	var latestProduct:Array<LatestProduct> = []
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -33,52 +39,76 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 		
 		// optional way to show activity indicator during image load (skipping the line will show no activity indicator)
 		slideshow.activityIndicator = DefaultActivityIndicator()
+//		let ea = [SDWebImageSource(url: URL(string: "http://mutfakustam.com/resimler/tarifler/et-tavuk-yemekleri/biberli-et-kavurmasi-136-1.jpg")!)]
+		slideshow.setImageInputs([ImageSource(image: UIImage(named: "imgDefault")!)])//,
+//								  ImageSource(image: UIImage(named: "petImg")!)])
 		
-		slideshow.setImageInputs([ImageSource(image: UIImage(named: "petImg")!),
-								  ImageSource(image: UIImage(named: "petImg1")!)])
+//		let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
+//		slideshow.addGestureRecognizer(recognizer)
 		
-		let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
-		slideshow.addGestureRecognizer(recognizer)
+		//Looks for single or multiple taps.
+//		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
 		
-//		self.getToken()
-		self.getSlider()
+		//Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+		//tap.cancelsTouchesInView = false
+		
+		let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+		tapOnScreen.cancelsTouchesInView = false
+		view.addGestureRecognizer(tapOnScreen)
+		
+//		view.addGestureRecognizer(tap)
+		
+		self.getToken()
+//		self.getSlider()
+//		self.getCategory()
 		
 		// Do any additional setup after loading the view.
     }
 	
+	@objc func dismissKeyboard() {
+		//Causes the view (or one of its embedded text fields) to resign the first responder status.
+		view.endEditing(true)
+	}
 	
 	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .portrait
 	}
     
-	@objc func didTap() {
-		let fullScreenController = slideshow.presentFullScreenController(from: self)
-		// set the activity indicator for full screen controller (skipping the line will show no activity indicator)
-		fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-	}
+//	@objc func didTap() {
+//		let fullScreenController = slideshow.presentFullScreenController(from: self)
+//		// set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+//		fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+//	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if collectionView == self.categoryCollectionView {
-			return 6
+			return self.petCategories.count
 		}
-		return 7
+		return self.latestProduct.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
 		if collectionView == self.categoryCollectionView  {
 			let cellCategory:ShopCategoryCollectionViewCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
+			cellCategory.imgProd.sd_setImage(with: URL(string:self.petCategories[indexPath.row].image!), placeholderImage: UIImage(named: ""))
 			return cellCategory
 			//categoryCellIdentifier
 		}
 		
 		let cellCategory:LatestProductCollectionViewCell = latestProdCollectionView.dequeueReusableCell(withReuseIdentifier: "latestProdCellIdentifier", for: indexPath) as! LatestProductCollectionViewCell
+//		let imageUrl =
+		cellCategory.imgProd.sd_setImage(with: URL(string: PBaseSUrl + "/pub/media/catalog/product" + self.latestProduct[indexPath.row].file!), placeholderImage: UIImage(named: ""))
+		cellCategory.lbProdName.text = self.latestProduct[indexPath.row].name
+		cellCategory.lbProdPrice.text = String(format: "AED %.2f", self.latestProduct[indexPath.row].price!)
 		return cellCategory
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 170, height: 195)
+		return CGSize(width: 170, height: 170)
 	}
+	
+	
 	
 	func getToken() {
 		if Reachability.isConnectedToInternet() {
@@ -87,7 +117,15 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 			let urlString =  PBaseUrl + PToken
 			
 			let parameters:[String:String] = ["username":"tarun","password":"admin1234"]
-			AlamofireCalls.postCall(urlString: urlString, parameters: parameters)
+			AlamofireCalls.postCall(urlString: urlString, parameters: parameters, completion: {
+				(token) -> Void in
+				print("from Login")
+				print(token)
+				if token != "" {
+					UserDefaults.standard.set(token, forKey: "adminToken")
+					self.getSlider()
+				}
+			})
 		}else{
 			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
 			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -100,14 +138,23 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			SVProgressHUD.show(withStatus: "Loading Request")
+			self.sliderArr = []
 			let urlString =  PBaseUrl + PSlider
 			let parameters:[String:String] = [:]
-			let headers:[String:String] = ["Authorization": "Bearer v8alp9psbs80f9ibthhy0idxx0dcpr18",
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
 										   "Content-Type": "application/json"]
 			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
 				(success) -> Void in
 				
-				print(success)
+//				print(success)
+				for dictionary in success{
+					let slider:Slider = Slider(dictionary: dictionary as! NSDictionary)
+					self.sliderArr.append(slider)
+				}
+				self.slideshow.setImageInputs([SDWebImageSource(url: URL(string:self.sliderArr[0].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[1].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[2].link!)!)])
+				self.getCategory()
+				
 			})
 		}else{
 			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
@@ -117,7 +164,106 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 		}
 	}
 	
+	func getCategory(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PCategories + "693"
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				print(success)
+				self.petCategories = []
+				for dictionary in success{
+					
+					let JSON = dictionary as! NSDictionary
+					if JSON["children"] != nil {
+						let arr = JSON["children"] as! NSArray
+						for dictChild in arr{
+							let categoryData:PetCategories = PetCategories(dictionary: dictChild as! NSDictionary)
+							self.petCategories.append(categoryData)
+						}
+					}
+					
+				}
+				self.categoryCollectionView.reloadData()
+				self.getLatestProduct()
 
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	func getLatestProduct(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "Loading Request")
+			self.latestProduct = []
+			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=category_id& searchCriteria[filterGroups][0][filters][0][value]=709& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=1"
+			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCallDictionary(urlString: encodedUrl!	, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+//				print(success)
+				let items = success["items"] as! NSArray
+				for dictionary in items{
+					let latestProd:LatestProduct = LatestProduct(dictionary: dictionary as! NSDictionary)
+					self.latestProduct.append(latestProd)
+				}
+				self.latestProdCollectionView.reloadData()
+				
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//		self.performSegue(withIdentifier: "categoryOneID", sender: indexPath)
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "categoryOneID") {
+			let vc = segue.destination as! ShopCategoryOneViewController
+			let indexPaths = self.categoryCollectionView.indexPathsForSelectedItems
+			let indexPath = indexPaths![0] as NSIndexPath
+			vc.categoryID = self.petCategories[indexPath.row].id!
+			
+			//			vc.params = self.params
+		}
+		if (segue.identifier == "latestProdID") {
+			let vc = segue.destination as! ProductViewController
+			let indexPaths = self.latestProdCollectionView.indexPathsForSelectedItems
+			let indexPath = indexPaths![0] as NSIndexPath
+			vc.productName = self.latestProduct[indexPath.row].sku!
+			
+			//			vc.params = self.params
+		}
+		if (segue.identifier == "searchID") {
+			let vc = segue.destination as! SearchProductViewController
+			vc.searchText = self.txtSearch.text ?? ""
+		}
+		
+		
+	}
+	
 }
 
 extension UIView {

@@ -3,6 +3,9 @@ PODS:
   - ImageSlideshow (1.7.0):
     - ImageSlideshow/Core (= 1.7.0)
   - ImageSlideshow/Core (1.7.0)
+  - ImageSlideshow/SDWebImage (1.7.0):
+    - ImageSlideshow/Core
+    - SDWebImage (< 5.0, >= 3.7)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -11,7 +14,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - ImageSlideshow (~> 1.4)
-  - SDWebImage (~> 4.0)
+  - ImageSlideshow/SDWebImage
   - SVProgressHUD (~> 2.2)
 
 SPEC REPOS:
@@ -27,6 +30,6 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 99a9845ce9a3285351aebcb6cb1aaec6a141c047
+PODFILE CHECKSUM: 747850a0cd12fe96f26e6687d5bc668229ea2849
 
 COCOAPODS: 1.5.3

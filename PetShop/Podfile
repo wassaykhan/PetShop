@@ -6,8 +6,10 @@ target 'PetShop' do
   use_frameworks!
 
  pod 'ImageSlideshow', '~> 1.4'
+pod "ImageSlideshow/SDWebImage"
 pod 'Alamofire', '~> 4.7'
 pod 'SVProgressHUD', '~> 2.2'
-pod 'SDWebImage', '~> 4.0'
+#pod 'SDWebImage', '~> 5.0'
+
 
 end

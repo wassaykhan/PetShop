@@ -7,17 +7,34 @@
 //
 
 import UIKit
+import ImageSlideshow
+import Alamofire
+import SVProgressHUD
+import SDWebImage
 
 class ProductViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource {
 
 	@IBOutlet weak var sizePickerView: UIPickerView!
 	@IBOutlet weak var lbSize: UILabel!
+	@IBOutlet weak var lbProductHeading: UILabel!
+	@IBOutlet weak var imgProduct: UIImageView!
+	@IBOutlet weak var lbTitle: UILabel!
+	@IBOutlet weak var lbPrice: UILabel!
+	@IBOutlet weak var lbDiscription: UILabel!
+	@IBOutlet weak var lbKeyBenefits: UILabel!
+	@IBOutlet weak var productScrollView: UIScrollView!
+	
+	var productName = ""
+	var productDetail:Product?
 	
 	var size = ["24 Lb Bag", "26 Lb Bag", "28 Lb Bag", "30 Lb Bag"]
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		print(productName)
+		self.lbProductHeading.text = ""
+		self.productScrollView.isHidden = true
+		self.getProductDetail()
         // Do any additional setup after loading the view.
     }
     
@@ -79,6 +96,49 @@ class ProductViewController: UIViewController,UICollectionViewDelegate,UICollect
 	@IBAction func btnSelectSizeAction(_ sender: Any) {
 		sizePickerView.isHidden = false
 	}
+	
+	func getProductDetail(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PProduct + self.productName
+			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCallDictionary(urlString: encodedUrl!, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				print(success)
+				self.productScrollView.isHidden = false
+//				self.productDetail = []
+				
+				self.productDetail = Product(dictionary: success)
+				
+				self.lbProductHeading.text = self.productDetail?.name
+				self.lbTitle.text = self.productDetail?.name
+				
+				if self.productDetail!.price != nil {
+					self.lbPrice.text = "AED " + String(format: "AED %.2f", self.productDetail!.price!)
+				}
+				
+				
+//				for dictionary in success{
+//					let prod:Product = Product(dictionary: dictionary as! NSDictionary)
+//					self.productDetail.append(prod)
+//				}
+				
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
 	/*
     // MARK: - Navigation
 

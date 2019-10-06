@@ -10,7 +10,10 @@ import UIKit
 
 class WishlistTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
+	@IBOutlet weak var imgProd: UIView!
+	@IBOutlet weak var lbTitle: UILabel!
+	@IBOutlet weak var imgPrice: UILabel!
+	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }

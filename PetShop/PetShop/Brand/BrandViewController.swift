@@ -7,18 +7,39 @@
 //
 
 import UIKit
+import ImageSlideshow
+import Alamofire
+import SVProgressHUD
+import SDWebImage
 
 class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 	@IBOutlet weak var brandTableView: UITableView!
 	
 	var brandDictionary = [String: [String]]()
+	var brandData:Array<Brand> = []
 	var brandSectionTitles = [String]()
 	var brands = [String]()
 	
+	var brandProduct:Array<Product> = []
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		brands = ["A Pet Hub", "ABO Gear", "Adams", "BMW", "Bugatti", "Bentley","Chevrolet", "Cadillac","Dodge","Ferrari", "Ford","Honda","Jaguar","Lamborghini","Mercedes", "Mazda","Nissan","Porsche","Rolls Royce","Toyota","Volkswagen"]
+		
+		self.getBrand()
+        // Do any additional setup after loading the view.
+    }
+	
+	func setBrand(){
+		
+		brands = []
+		
+		for label in self.brandData {
+			let setB = label.label
+			brands.append(setB!)
+		}
+		
+//		brands = ["A Pet Hub", "ABO Gear", "Adams", "BMW", "Bugatti", "Bentley","Chevrolet", "Cadillac","Dodge","Ferrari", "Ford","Honda","Jaguar","Lamborghini","Mercedes", "Mazda","Nissan","Porsche","Rolls Royce","Toyota","Volkswagen"]
 		
 		for brand in brands {
 			let brandKey = String(brand.prefix(1))
@@ -33,9 +54,7 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 		// 2
 		brandSectionTitles = [String](brandDictionary.keys)
 		brandSectionTitles = brandSectionTitles.sorted(by: { $0 < $1 })
-		
-        // Do any additional setup after loading the view.
-    }
+	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		// 1
@@ -79,14 +98,106 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 	@IBAction func btnBackAction(_ sender: Any) {
 		self.navigationController?.popViewController(animated: true)
 	}
-	/*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
+		
+		let currentCell = self.brandTableView.cellForRow(at: indexPath!) as! BrandTableViewCell
+		let brandLabel = currentCell.lbBrand.text
+		var brandValue = ""
+		for items in self.brandData{
+			if items.label == brandLabel{
+				brandValue = items.value!
+			}
+		}
+//		print(currentCell.textLabel!.text)
+		
+		self.getBrandProduct(value:brandValue)
+	}
+	
+	func getBrandProduct(value:String){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "Loading Request")
+			self.brandProduct = []
+			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=manufacturer& searchCriteria[filterGroups][0][filters][0][value]=" + value + "& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=1"
+			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCallDictionary(urlString: encodedUrl!	, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				//				print(success)
+				let items = success["items"] as! NSArray
+				for dictionary in items{
+					let prod:Product = Product(dictionary: dictionary as! NSDictionary)
+					self.brandProduct.append(prod)
+				}
+				
+				let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
+				nextViewController.productList = self.brandProduct
+				self.navigationController?.pushViewController(nextViewController, animated: true)
+				
+//				self.brandTableView.reloadData()
+				
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	
+	func getBrand(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PAtoZ
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				print(success)
+				self.brandData = []
+				for dictionary in success {
+					let brands:Brand = Brand(dictionary: dictionary as! NSDictionary)
+					self.brandData.append(brands)
+				}
+				
+				self.setBrand()
+				
+				self.brandTableView.reloadData()
+				
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		
+		if (segue.identifier == "prodBrandID") {
+			let vc = segue.destination as! ProductListViewController
+//			let indexPaths = self.newArrivalTableView.indexPathForSelectedRow
+//			let indexPath = indexPaths! as NSIndexPath
+			vc.productList = []	
+			
+			//			vc.params = self.params
+		}
+	}
 
 }
