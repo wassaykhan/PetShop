@@ -43,6 +43,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 		slideshow.setImageInputs([ImageSource(image: UIImage(named: "imgDefault")!)])//,
 //								  ImageSource(image: UIImage(named: "petImg")!)])
 		
+		
 //		let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
 //		slideshow.addGestureRecognizer(recognizer)
 		
@@ -73,12 +74,6 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 	open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .portrait
 	}
-    
-//	@objc func didTap() {
-//		let fullScreenController = slideshow.presentFullScreenController(from: self)
-//		// set the activity indicator for full screen controller (skipping the line will show no activity indicator)
-//		fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-//	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if collectionView == self.categoryCollectionView {
@@ -109,7 +104,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 	}
 	
 	
-	
+	//admin token
 	func getToken() {
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
@@ -123,7 +118,15 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 				print(token)
 				if token != "" {
 					UserDefaults.standard.set(token, forKey: "adminToken")
-					self.getSlider()
+					let customerToken = UserDefaults.standard.string(forKey: "customerToken")
+					if customerToken != nil {
+						let email = UserDefaults.standard.string(forKey: "emailAddress")
+						let password = UserDefaults.standard.string(forKey: "password")
+						self.getCustomerToken(userName: email!, password: password!)
+					}else {
+						self.getSlider()
+					}
+					
 				}
 			})
 		}else{
@@ -133,6 +136,30 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 			self.present(alert, animated: true, completion: nil)
 		}
 	}
+	
+	func getCustomerToken(userName:String,password:String) {
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			SVProgressHUD.show(withStatus: "Loading Request")
+			let urlString =  PBaseUrl + PCustomerToken
+			let parameters:[String:String] = ["username":userName,"password":password]
+			AlamofireCalls.postCall(urlString: urlString, parameters: parameters, completion: {
+				(token) -> Void in
+				print("Main")
+				print(token)
+				if token != "" {
+					UserDefaults.standard.set(token, forKey: "customerToken")
+				}
+				self.getSlider()
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
 	
 	func getSlider(){
 		if Reachability.isConnectedToInternet() {
@@ -152,7 +179,16 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
 					let slider:Slider = Slider(dictionary: dictionary as! NSDictionary)
 					self.sliderArr.append(slider)
 				}
-				self.slideshow.setImageInputs([SDWebImageSource(url: URL(string:self.sliderArr[0].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[1].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[2].link!)!)])
+				
+				var imageSource: [SDWebImageSource] = []
+				for image in self.sliderArr {
+					let img = image.link
+					imageSource.append(SDWebImageSource(url: URL(string:img!)!))
+				}
+				self.slideshow.setImageInputs(imageSource)
+				
+//				self.slideshow.setImageInputs([SDWebImageSource(url: URL(string:self.sliderArr[0].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[1].link!)!),SDWebImageSource(url: URL(string:self.sliderArr[2].link!)!)])
+//				self.slideshow.ap
 				self.getCategory()
 				
 			})

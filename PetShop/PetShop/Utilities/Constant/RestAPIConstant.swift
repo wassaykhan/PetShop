@@ -9,10 +9,12 @@
 import Foundation
 
 // Base Url
-let PBaseUrl:String = "http://devpetshop.onlinetestingserver.com/petshop/rest/V1/"
+let PBaseUrl:String = "http://www.thepetstore.ae/rest/V1/"
+//"http://devpetshop.onlinetestingserver.com/petshop/rest/V1/"
 
 // Base Url Short
-let PBaseSUrl:String = "http://devpetshop.onlinetestingserver.com/petshop/"
+let PBaseSUrl:String = "http://www.thepetstore.ae/"
+//"http://devpetshop.onlinetestingserver.com/petshop/"
 
 //Token Admin
 let PToken:String = "integration/admin/token"
@@ -38,4 +40,32 @@ let PAtoZ:String =  "products/attributes/manufacturer/options"
 //Account
 let PCustomerAccount:String = "customers/me"
 
+//Cart
+let PCart:String = "carts/mine/items"
+
+//Create User
+let PCreateCustomer:String = "customers/?"
+
+//Estimate Shipping
+let PEstimateShipping:String = "carts/mine/estimate-shipping-methods?"
+
+//Set Shipping Information
+let PShippingInformation:String = "carts/mine/shipping-information?"
+
+//Place Order
+let PPlaceOrder:String = "carts/mine/payment-information?"
+
+//Filter
+let PFilter:String = "products/?searchCriteria[filterGroups][0][filters][0][field]=category_id&"
+
+let PFilterLayer:String = "layernaivgation/list/?categoryId="
+
+//Attributes
+let PAttributes:String = "products/attributes/"
+
+// Cart ID
+let PCartId:String = "carts/mine?"
+
+// Remove Cart
+let PCartRemove:String = "carts/mine/items/"
 

@@ -141,6 +141,7 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 				
 				let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
 				nextViewController.productList = self.brandProduct
+				nextViewController.isFromBrand = true
 				self.navigationController?.pushViewController(nextViewController, animated: true)
 				
 //				self.brandTableView.reloadData()

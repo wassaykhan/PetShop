@@ -47,7 +47,8 @@ class OrdersViewController: UIViewController,UITableViewDelegate,UITableViewData
 			
 			SVProgressHUD.show(withStatus: "Loading Request")
 			self.orderArr = []
-			let urlString =  PBaseUrl + "orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=22&searchCriteria[filterGroups][0][filters][0][conditionType]=eq"
+			let customerID = String(UserDefaults.standard.integer(forKey: "id"))
+			let urlString =  PBaseUrl + "orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=" + customerID + "&searchCriteria[filterGroups][0][filters][0][conditionType]=eq"
 			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")

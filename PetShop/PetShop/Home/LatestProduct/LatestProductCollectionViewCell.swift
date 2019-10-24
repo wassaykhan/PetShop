@@ -14,4 +14,7 @@ class LatestProductCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var lbProdName: UILabel!
 	@IBOutlet weak var lbProdPrice: UILabel!
 	@IBOutlet weak var lbProdCutPrice: UILabel!
+	
+	
+	
 }

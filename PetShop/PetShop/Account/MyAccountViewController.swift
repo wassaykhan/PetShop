@@ -19,11 +19,14 @@ class MyAccountViewController: UIViewController {
 	
 	@IBOutlet weak var lbEmail: UILabel!
 	
+	var userName = ""
+	var emailAddress = ""
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.lbName.text = ""
-		self.lbEmail.text = ""
-		self.getAccountDetail()
+		self.lbName.text = userName
+		self.lbEmail.text = emailAddress
+//		self.getAccountDetail()
 		
 		// Do any additional setup after loading the view.
 	}
@@ -37,34 +40,11 @@ class MyAccountViewController: UIViewController {
 	}
 	
 	@IBAction func lbLogoutAction(_ sender: Any) {
+		UserDefaults.standard.removeObject(forKey: "customerToken")
 		self.navigationController?.popViewController(animated: true)
 	}
 	
-	func getAccountDetail(){
-		if Reachability.isConnectedToInternet() {
-			print("Yes! internet is available.")
-			
-			SVProgressHUD.show(withStatus: "Loading Request")
-			let urlString =  PBaseUrl + PCustomerAccount
-			let parameters:[String:String] = [:]
-			let customerToken = UserDefaults.standard.string(forKey: "customerToken")
-			let headers:[String:String] = ["Authorization": "Bearer " + customerToken!,
-										   "Content-Type": "application/json"]
-			AlamofireCalls.getCallDictionary(urlString: urlString, parameters: parameters, headers: headers, completion: {
-				(success) -> Void in
-				
-				print(success)
-				self.lbName.text = success["firstname"] as? String
-				self.lbEmail.text = success["email"] as? String
-				
-			})
-		}else{
-			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
-			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-			alert.addAction(defaultAction)
-			self.present(alert, animated: true, completion: nil)
-		}
-	}
+	
 	
 	
 	/*

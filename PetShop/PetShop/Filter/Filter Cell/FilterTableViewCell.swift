@@ -1,20 +1,17 @@
 //
-//  ReviewOrderTableViewCell.swift
+//  FilterTableViewCell.swift
 //  PetShop
 //
-//  Created by Wassay Khan on 19/06/2019.
+//  Created by Wassay Khan on 13/10/2019.
 //  Copyright © 2019 Wassay Khan. All rights reserved.
 //
 
 import UIKit
 
-class ReviewOrderTableViewCell: UITableViewCell {
+class FilterTableViewCell: UITableViewCell {
 
-	@IBOutlet weak var lbPrice: UILabel!
-	@IBOutlet weak var lbUnitPrice: UILabel!
-	@IBOutlet weak var lbQuantity: UILabel!
-	@IBOutlet weak var lbName: UILabel!
-	@IBOutlet weak var imgProd: UIImageView!
+	@IBOutlet weak var lbFilter: UILabel!
+	@IBOutlet weak var btnFilter: UIButton!
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -14,12 +14,13 @@ class Product: NSObject {
 	var name:String?
 	var image:String?
 	var sku:String?
-	var price:Int?
+	var price:Float?
 	var weight:Int?
 	var quantity:Int?
 	var storeId:Int?
 	var typeID:String?
 	var createdAt:String?
+	var fileImage:String?
 	
 	init(dictionary : NSDictionary){
 		self.id = dictionary["id"] as? Int
@@ -27,11 +28,25 @@ class Product: NSObject {
 		self.image = dictionary["image"] as? String
 		self.name = dictionary["name"] as? String
 		self.sku = dictionary["sku"] as? String
-		self.price = dictionary["price"] as? Int
+		self.price = dictionary["price"] as? Float
 		self.weight = dictionary["weight"] as? Int
 		self.quantity = dictionary["qty"] as? Int
 		self.typeID = dictionary["type_id"] as? String
 		self.storeId = dictionary["store_id"] as? Int
 		self.createdAt = dictionary["created_at"] as? String
+		var media:NSArray = []
+		if dictionary["media_gallery_entries"] != nil {
+			media = dictionary["media_gallery_entries"] as! NSArray
+		}
+		
+		var urlImageString = ""
+		if media.count > 0 {
+			let image = media[0] as! NSDictionary
+			let finalImage = image["file"] as! String
+			urlImageString = PBaseSUrl + "pub/media/catalog/product" + finalImage
+			
+		}
+		self.fileImage = urlImageString
+		
 	}
 }

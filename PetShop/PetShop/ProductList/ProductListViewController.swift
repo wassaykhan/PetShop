@@ -18,7 +18,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
 	
 	var productList:Array<Product>?
 	var productID = 0
-	
+	var isFromBrand = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,6 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 142
-		
-		
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,8 +47,15 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
 		}
 		
 		if self.productList![indexPath.row].image != nil {
-			cellCategory.imgProd.sd_setImage(with: URL(string:a.image!), placeholderImage: UIImage(named: ""))
+			cellCategory.imgProd.sd_setImage(with: URL(string:a.image!), placeholderImage: UIImage(named: "imgDefault"))
 		}
+		
+		if isFromBrand {
+			if self.productList![indexPath.row].fileImage != nil {
+				cellCategory.imgProd.sd_setImage(with: URL(string:a.fileImage!), placeholderImage: UIImage(named: "imgDefault"))
+			}
+		}
+		
 		
 		return cellCategory
 	}

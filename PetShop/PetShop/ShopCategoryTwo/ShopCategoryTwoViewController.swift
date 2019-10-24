@@ -102,10 +102,10 @@ class ShopCategoryTwoViewController: UIViewController,UICollectionViewDelegate,U
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-			let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
+		let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
 				//				let arrM = self.petCategories[indexPath.row - 2].productArr
-			nextViewController.productList = self.petCategories[indexPath.row].productArr
-			self.navigationController?.pushViewController(nextViewController, animated: true)
+		nextViewController.productList = self.petCategories[indexPath.row].productArr
+		self.navigationController?.pushViewController(nextViewController, animated: true)
 		
 		
 		
