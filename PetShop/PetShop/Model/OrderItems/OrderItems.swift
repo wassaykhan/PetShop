@@ -15,6 +15,8 @@ class OrderItems: NSObject {
 	var weight:Float?
 	var quantity:Float?
 	var name:String?
+	var sku:String?
+	var image:String?
 	
 	init(dictionary : NSDictionary){
 		self.orderID = dictionary["order_id"] as? Int
@@ -22,6 +24,6 @@ class OrderItems: NSObject {
 		self.weight = dictionary["weight"] as? Float
 		self.quantity = dictionary["qty_ordered"] as? Float
 		self.name = dictionary["name"] as? String
-		
+		self.sku = dictionary["sku"] as? String
 	}
 }

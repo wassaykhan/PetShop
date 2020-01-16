@@ -11,19 +11,47 @@ import ImageSlideshow
 import Alamofire
 import SVProgressHUD
 import SDWebImage
+import BadgeSwift
 
-class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITabBarControllerDelegate {
 
 	@IBOutlet weak var shopCategoryCollectionView: UICollectionView!
 	
+	@IBOutlet weak var lbBadgeCount: BadgeSwift!
 	@IBOutlet weak var textSearch: UITextField!
 	@IBOutlet weak var lbTitle: UILabel!
 	var categoryID = 0
 	var petCategories:Array<PetCategories> = []
 	var bannerImage = ""
 	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+//		self.setStatusBarColor()
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		self.setStatusBarColor()
+		let badgeCount = UserDefaults.standard.string(forKey: "badgeCount")
+		if badgeCount != nil {
+			self.lbBadgeCount.isHidden = false
+			self.lbBadgeCount.text = badgeCount
+		}else {
+			self.lbBadgeCount.isHidden = true
+		}
+	}
+	
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		self.navigationController?.popToRootViewController(animated: false)
+	}
+	
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
+//		self.setStatusBarColor()
+		tabBarController?.delegate = self
 		print(categoryID)
 		self.lbTitle.text = ""
 		self.shopCategoryCollectionView.delegate = self
@@ -46,7 +74,7 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 		
 		if indexPath.row == 0 {
 			let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryLongCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
-			cellCategory.imgProd.sd_setImage(with: URL(string:self.bannerImage), placeholderImage: UIImage(named: ""))
+			cellCategory.imgProd.sd_setImage(with: URL(string:self.bannerImage), placeholderImage: UIImage(named: "imgDefaultBanner"))
 			return cellCategory
 		}else if indexPath.row == 1 {
 			let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryAZCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
@@ -55,7 +83,7 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 			let cellCategory:ShopCategoryCollectionViewCell = shopCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellIdentifier", for: indexPath) as! ShopCategoryCollectionViewCell
 			cellCategory.lbProd.text = self.petCategories[indexPath.row - 2].name
 			if self.petCategories[indexPath.row - 2].image != nil {
-				cellCategory.imgProd.sd_setImage(with: URL(string:self.petCategories[indexPath.row - 2].image!), placeholderImage: UIImage(named: ""))
+				cellCategory.imgProd.sd_setImage(with: URL(string:self.petCategories[indexPath.row - 2].image!), placeholderImage: UIImage(named: "imgDefault"))
 			}
 			
 			
@@ -68,20 +96,21 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
 		if indexPath.row == 0 {
-			return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/4 - 40)
+			return CGSize(width: UIScreen.main.bounds.width - 20, height: 170)
 		}
 		
 		//iphone X XS
 		if UIScreen.main.nativeBounds.height == 2436 {
-			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 10)
+			//			return CGSize(width: UIScreen.main.bounds.width/2 - 20, height: UIScreen.main.bounds.height/4 - 20)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 17, height: UIScreen.main.bounds.height/4 - 33)
 		}//2688 iphone XS_Max
 		if UIScreen.main.nativeBounds.height == 2688 {
-			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 10)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 17, height: UIScreen.main.bounds.height/4 - 33)
 		}//1792 iphone XR
 		if UIScreen.main.nativeBounds.height == 1792 {
-			return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4 - 10)
+			return CGSize(width: UIScreen.main.bounds.width/2 - 17, height: UIScreen.main.bounds.height/4 - 33)
 		}
-		return CGSize(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/3 - 10)
+		return CGSize(width: UIScreen.main.bounds.width/2 - 17, height: 170)
 	}
 	
 	
@@ -94,7 +123,7 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
+			SVProgressHUD.show()
 			let urlString =  PBaseUrl + PCategories + String(self.categoryID)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
@@ -131,6 +160,13 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		
+		if indexPath.row == 1{
+			let vc = self.storyboard?.instantiateViewController(withIdentifier: "BrandVCID") as! BrandViewController
+			vc.brandID = self.categoryID
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+		
 		if indexPath.row > 1 {
 			if self.petCategories[indexPath.row - 2].childern != "" {
 				let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "categoryTwoID") as! ShopCategoryTwoViewController
@@ -140,6 +176,8 @@ class ShopCategoryOneViewController: UIViewController,UICollectionViewDelegate,U
 				let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
 //				let arrM = self.petCategories[indexPath.row - 2].productArr
 				nextViewController.productList = self.petCategories[indexPath.row - 2].productArr
+				nextViewController.productTitle = self.petCategories[indexPath.row - 2].name!
+				nextViewController.valueFromCategory = self.petCategories[indexPath.row - 2].id!
 				self.navigationController?.pushViewController(nextViewController, animated: true)
 			}
 		}

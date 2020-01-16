@@ -9,13 +9,13 @@
 import UIKit
 
 class OrderDetail: NSObject {
-	var grandTotal:Float?
+	var grandTotal:Double?
 	var incrementID:String?
 	var status:String?
 	var orderItems: Array<OrderItems> = []
 	
 	init(dictionary : NSDictionary){
-		self.grandTotal = dictionary["grand_total"] as? Float
+		self.grandTotal = dictionary["grand_total"] as? Double
 		self.incrementID = dictionary["increment_id"] as? String
 		self.status = dictionary["status"] as? String
 		let arrOrder = dictionary["items"] as! NSArray

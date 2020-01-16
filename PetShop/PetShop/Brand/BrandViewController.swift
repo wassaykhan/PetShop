@@ -11,17 +11,43 @@ import ImageSlideshow
 import Alamofire
 import SVProgressHUD
 import SDWebImage
+import BadgeSwift
 
-class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITabBarControllerDelegate {
 
 	@IBOutlet weak var brandTableView: UITableView!
 	
+	@IBOutlet weak var lbBadgeCount: BadgeSwift!
 	var brandDictionary = [String: [String]]()
 	var brandData:Array<Brand> = []
 	var brandSectionTitles = [String]()
 	var brands = [String]()
+	var brandID = 0
 	
 	var brandProduct:Array<Product> = []
+	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		self.navigationController?.popToRootViewController(animated: false)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		self.setStatusBarColor()
+		tabBarController?.delegate = self
+		self.brandTableView.sectionIndexColor = UIColor.init(red: 2/255, green: 166/255, blue: 178/255, alpha: 1)
+		self.brandTableView.sectionIndexBackgroundColor = UIColor.clear
+		let badgeCount = UserDefaults.standard.string(forKey: "badgeCount")
+		if badgeCount != nil {
+			self.lbBadgeCount.isHidden = false
+			self.lbBadgeCount.text = badgeCount
+		}else {
+			self.lbBadgeCount.isHidden = true
+		}
+	}
+	
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,16 +140,23 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 		}
 //		print(currentCell.textLabel!.text)
 		
-		self.getBrandProduct(value:brandValue)
+		let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
+//		nextViewController.productList = self.brandProduct
+		nextViewController.isFromBrand = true
+		nextViewController.productTitle = currentCell.lbBrand.text!
+		nextViewController.valueFromBrand = brandValue
+		self.navigationController?.pushViewController(nextViewController, animated: true)
+		
+//		self.getBrandProduct(value:brandValue,title: currentCell.lbBrand.text!)
 	}
-	
-	func getBrandProduct(value:String){
+
+	func getBrandProduct(value:String, title:String){
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
+			SVProgressHUD.show()
 			self.brandProduct = []
-			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=manufacturer& searchCriteria[filterGroups][0][filters][0][value]=" + value + "& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=1"
+			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=manufacturer& searchCriteria[filterGroups][0][filters][0][value]=" + value + "& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=1&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][2][filters][0][field]=visibility& searchCriteria[filterGroups][2][filters][0][value]=1& searchCriteria[filterGroups][1][filters][0][value]=1& searchCriteria[filterGroups][2][filters][0][condition_type]=neq"
 			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
@@ -136,12 +169,14 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 				let items = success["items"] as! NSArray
 				for dictionary in items{
 					let prod:Product = Product(dictionary: dictionary as! NSDictionary)
+					if prod.name == "" {}
 					self.brandProduct.append(prod)
 				}
 				
 				let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "productListID") as! ProductListViewController
 				nextViewController.productList = self.brandProduct
 				nextViewController.isFromBrand = true
+				nextViewController.productTitle = title
 				self.navigationController?.pushViewController(nextViewController, animated: true)
 				
 //				self.brandTableView.reloadData()
@@ -155,25 +190,41 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 		}
 	}
 	
-	
 	func getBrand(){
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
-			let urlString =  PBaseUrl + PAtoZ
+			SVProgressHUD.show()
+			let urlString =  PBaseUrl + PBrand + String(self.brandID)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
 			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
 										   "Content-Type": "application/json"]
-			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
+			AlamofireCalls.getCallDictionary(urlString: urlString, parameters: parameters, headers: headers, completion: {
 				(success) -> Void in
 				
 				print(success)
 				self.brandData = []
-				for dictionary in success {
-					let brands:Brand = Brand(dictionary: dictionary as! NSDictionary)
-					self.brandData.append(brands)
+				
+				let dict = success["availablefilter"] as! NSArray
+				
+				for dictionary in dict {
+					
+					let brand = dictionary as! NSDictionary
+					
+					if brand["name"] as! String  == "Brand"{
+						
+						let data = brand["data"] as! NSArray
+						
+						for brandP in data{
+							let brands:Brand = Brand(dictionary: brandP as! NSDictionary)
+							if brands.value != ""{
+								self.brandData.append(brands)
+							}
+						}
+						
+						
+					}
 				}
 				
 				self.setBrand()
@@ -188,6 +239,45 @@ class BrandViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 			self.present(alert, animated: true, completion: nil)
 		}
 	}
+	
+	
+	/*
+	func getBrand(){
+		if Reachability.isConnectedToInternet() {
+			print("Yes! internet is available.")
+			
+			SVProgressHUD.show(withStatus: "")
+			let urlString =  PBaseUrl + PAtoZ
+			let parameters:[String:String] = [:]
+			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
+			let headers:[String:String] = ["Authorization": "Bearer " + adminToken!,
+										   "Content-Type": "application/json"]
+			AlamofireCalls.getCall(urlString: urlString, parameters: parameters, headers: headers, completion: {
+				(success) -> Void in
+				
+				print(success)
+				self.brandData = []
+				for dictionary in success {
+					let brands:Brand = Brand(dictionary: dictionary as! NSDictionary)
+					if brands.value != ""{
+						self.brandData.append(brands)
+					}
+					
+				}
+				
+				self.setBrand()
+				
+				self.brandTableView.reloadData()
+				
+			})
+		}else{
+			let alert = UIAlertController(title: "Network", message: PNoNetwork, preferredStyle: UIAlertController.Style.alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(defaultAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	*/
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		

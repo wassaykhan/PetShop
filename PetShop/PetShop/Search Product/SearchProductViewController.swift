@@ -11,19 +11,44 @@ import ImageSlideshow
 import Alamofire
 import SVProgressHUD
 import SDWebImage
+import BadgeSwift
 
-class SearchProductViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchProductViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITabBarControllerDelegate {
 
 	@IBOutlet weak var searchTableView: UITableView!
 	
+	@IBOutlet weak var btnNoResult: UIButton!
+	@IBOutlet weak var lbBadgeCount: BadgeSwift!
 	@IBOutlet weak var txtSearch: UITextField!
 	var searchText = ""
 	var searchProduct:Array<LatestProduct> = []
 	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		self.setStatusBarColor()
+		let badgeCount = UserDefaults.standard.string(forKey: "badgeCount")
+		if badgeCount != nil {
+			self.lbBadgeCount.isHidden = true
+		}else {
+			self.lbBadgeCount.isHidden = true
+		}
+	}
+	
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		self.navigationController?.popToRootViewController(animated: false)
+	}
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		tabBarController?.delegate = self
 		self.txtSearch.text = self.searchText
-		self.getSearchProduct()
+		if searchText != "" {
+			self.getSearchProduct()
+		}
+		
         // Do any additional setup after loading the view.
     }
 	
@@ -32,7 +57,7 @@ class SearchProductViewController: UIViewController,UITableViewDelegate,UITableV
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 142
+		return 180
 		
 		
 	}
@@ -44,7 +69,15 @@ class SearchProductViewController: UIViewController,UITableViewDelegate,UITableV
 		}
 		
 		cellCategory.lbName.text = self.searchProduct[indexPath.row].name
-		cellCategory.lbPrice.text = String(format: "AED %.2f", self.searchProduct[indexPath.row].price!)
+		if self.searchProduct[indexPath.row].price != nil {
+			cellCategory.lbPrice.text = String(format: "AED %.2f", self.searchProduct[indexPath.row].price!)
+		}
+		if self.searchProduct[indexPath.row].isConfig == "configurable" {
+			cellCategory.lbMoreChoices.isHidden = false
+		}else{
+			cellCategory.lbMoreChoices.isHidden = true
+		}
+		
 		return cellCategory
 	}
 	
@@ -54,9 +87,9 @@ class SearchProductViewController: UIViewController,UITableViewDelegate,UITableV
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
+			SVProgressHUD.show()
 			self.searchProduct = []
-			let urlString =  PBaseUrl + "products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%" + self.searchText + "%&searchCriteria[filter_groups][0][filters][0][condition_type]=like&searchCriteria[pageSize]=10&searchCriteria[currentPage]=1"
+			let urlString =  PBaseUrl + "products?searchCriteria[pageSize]=10&searchCriteria[currentPage]=1&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][2][filters][0][field]=visibility& searchCriteria[filterGroups][2][filters][0][value]=1& searchCriteria[filterGroups][2][filters][0][condition_type]=neq&searchCriteria[filterGroups][0][filters][0][field]=name&searchCriteria[filterGroups][0][filters][0][value]=%" + self.searchText + "%&searchCriteria[filterGroups][0][filters][0][condition_type]=like&searchCriteria[filterGroups][1][filters][0][value]=1&searchCriteria[filterGroups][1][filters][0][conditionType]=gteq&searchCriteria[sortOrders][6][field]=created_at&searchCriteria[sortOrders][6][direction]=DESC"
 			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
@@ -71,7 +104,17 @@ class SearchProductViewController: UIViewController,UITableViewDelegate,UITableV
 					let latestProd:LatestProduct = LatestProduct(dictionary: dictionary as! NSDictionary)
 					self.searchProduct.append(latestProd)
 				}
-				self.searchTableView.reloadData()
+				
+				if self.searchProduct.count > 0{
+					self.searchTableView.reloadData()
+					self.searchTableView.isHidden = false
+					self.btnNoResult.isHidden = true
+				}else{
+					self.searchTableView.isHidden = true
+					self.btnNoResult.isHidden = false
+				}
+				
+				
 				
 			})
 		}else{
@@ -85,7 +128,10 @@ class SearchProductViewController: UIViewController,UITableViewDelegate,UITableV
 
 	@IBAction func btnSearchAction(_ sender: Any) {
 		self.searchText = self.txtSearch.text ?? ""
-		self.getSearchProduct()
+		if self.searchText != "" {
+			self.getSearchProduct()
+		}
+		
 	}
 	
 	

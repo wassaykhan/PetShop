@@ -34,8 +34,14 @@ let PProduct:String = "products/"
 //WishList
 let PWishList:String = "wishlist"
 
+//Add Wish List
+let PAddWishList:String = "wishlist/add"
+
 //A-Z Brand
 let PAtoZ:String =  "products/attributes/manufacturer/options"
+
+//Brand
+let PBrand:String = "layernaivgation/list/?categoryId="
 
 //Account
 let PCustomerAccount:String = "customers/me"
@@ -69,3 +75,32 @@ let PCartId:String = "carts/mine?"
 // Remove Cart
 let PCartRemove:String = "carts/mine/items/"
 
+//Forgot Password
+let PForgotPassword:String = "customers/password"
+
+//Edit Profile
+let PEditProfile:String = "customers/"
+
+//delete Wishlist
+let PWishListDelete:String = "deleteWishlistForCustomer/"
+
+//getproductconfigvalue
+let PProductConfigValue:String = "getproductconfigvalue/"
+
+//check wishlist
+let PCheckWishlist:String = "getwhishlistcustomersku/"
+
+//getCartItem
+let PGetCartProducts:String = "getcartproducts/"
+
+//add address
+let PCustomers:String = "customers/"
+
+//Code
+let PCode:String = "carts/mine/coupons/"
+
+//getorderreview/
+let PGetOrderReview = "getorderreview/"
+
+//getobjectcartcount
+let PGetCuont = "getobjectcartcount"

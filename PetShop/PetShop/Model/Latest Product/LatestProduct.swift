@@ -15,13 +15,14 @@ class LatestProduct: NSObject {
 	var price:Float?
 	var file:String?
 	var sku:String?
-	
+	var isConfig:String?
 	
 	init(dictionary : NSDictionary){
 		self.id = dictionary["id"] as? Int
 		self.price = dictionary["price"] as? Float
 		self.name = dictionary["name"] as? String
 		self.sku = dictionary["sku"] as? String
+		self.isConfig = dictionary["type_id"] as? String
 		let imageLink = dictionary["media_gallery_entries"] as! NSArray
 		for item in imageLink {
 			let getDict = item as! NSDictionary

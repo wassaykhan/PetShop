@@ -13,7 +13,7 @@ class Brand: NSObject {
 	var value:String?
 	
 	init(dictionary : NSDictionary){
-		self.label = dictionary["label"] as? String
+		self.label = dictionary["display"] as? String
 		self.value = dictionary["value"] as? String
 	}
 }

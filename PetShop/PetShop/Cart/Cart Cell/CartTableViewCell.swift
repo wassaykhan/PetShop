@@ -15,13 +15,22 @@ class CartTableViewCell: UITableViewCell {
 	@IBOutlet weak var lbPrice: UILabel!
 	@IBOutlet weak var lbSize: UIButton!
 	@IBOutlet weak var lbQuantity: UIButton!
+	@IBOutlet weak var lbQty: UILabel!
+	@IBOutlet weak var lbSizeValue: UILabel!
+	@IBOutlet weak var viewBot: UIView!
+	@IBOutlet weak var heightTopName: NSLayoutConstraint!
+
+	@IBOutlet weak var heightLbSize: NSLayoutConstraint!
+	@IBOutlet weak var widthLbSize: NSLayoutConstraint!
+	@IBOutlet weak var lbCustomName: UILabel!
+	var onSubTapped : (() -> Void)? = nil
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 	
 	
-	var onSubTapped : (() -> Void)? = nil
+	
 	
 	@IBAction func btnRemoveProductAction(_ sender: Any) {
 		if let onSubTapped = self.onSubTapped {

@@ -13,6 +13,7 @@ class ArrivalsTableViewCell: UITableViewCell {
 	@IBOutlet weak var imgProd: UIImageView!
 	@IBOutlet weak var lbName: UILabel!
 	@IBOutlet weak var lbPrice: UILabel!
+	@IBOutlet weak var lbMoreChoices: UILabel!
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

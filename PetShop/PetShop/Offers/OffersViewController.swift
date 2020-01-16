@@ -11,10 +11,30 @@ import ImageSlideshow
 import Alamofire
 import SVProgressHUD
 import SDWebImage
+import BadgeSwift
 
 class OffersViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	var offerProduct:Array<LatestProduct> = []
 	@IBOutlet weak var offerTableView: UITableView!
+	@IBOutlet weak var lbBadgeCount: BadgeSwift!
+	@IBOutlet weak var btnNoData: UIButton!
+	
+	var page = 1
+	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		self.setStatusBarColor()
+		let badgeCount = UserDefaults.standard.string(forKey: "badgeCount")
+		if badgeCount != nil {
+			self.lbBadgeCount.isHidden = false
+			self.lbBadgeCount.text = badgeCount
+		}else {
+			self.lbBadgeCount.isHidden = true
+		}
+	}
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +47,28 @@ class OffersViewController: UIViewController,UITableViewDelegate,UITableViewData
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 142
+		return 200
 		
 		
+	}
+	
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if indexPath.row == (self.offerProduct.count - 1) {
+			self.page += 1
+			self.getOfferProduct()
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cellCategory:ArrivalsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "arrivalsCellIdentifier", for: indexPath) as! ArrivalsTableViewCell
 		if self.offerProduct[indexPath.row].file != nil {
 			cellCategory.imgProd.sd_setImage(with: URL(string: PBaseSUrl + "/pub/media/catalog/product" + self.offerProduct[indexPath.row].file!), placeholderImage: UIImage(named: ""))
+		}
+		
+		if self.offerProduct[indexPath.row].isConfig == "configurable" {
+			cellCategory.lbMoreChoices.isHidden = false
+		}else{
+			cellCategory.lbMoreChoices.isHidden = true
 		}
 		
 		cellCategory.lbName.text = self.offerProduct[indexPath.row].name
@@ -47,9 +80,9 @@ class OffersViewController: UIViewController,UITableViewDelegate,UITableViewData
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
-			self.offerProduct = []
-			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=category_id& searchCriteria[filterGroups][0][filters][0][value]=714& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=1"
+			SVProgressHUD.show()
+//			self.offerProduct = []
+			let urlString =  PBaseUrl + "products?searchCriteria[filterGroups][0][filters][0][field]=category_id& searchCriteria[filterGroups][0][filters][0][value]=714& searchCriteria[sortOrders][0][direction]=DESC& searchCriteria[pageSize]=10& searchCriteria[currentPage]=" + String(self.page) + "&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][2][filters][0][field]=visibility& searchCriteria[filterGroups][2][filters][0][value]=1& searchCriteria[filterGroups][1][filters][0][value]=1& searchCriteria[filterGroups][2][filters][0][condition_type]=neq"
 			let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 			let parameters:[String:String] = [:]
 			let adminToken = UserDefaults.standard.string(forKey: "adminToken")
@@ -63,6 +96,10 @@ class OffersViewController: UIViewController,UITableViewDelegate,UITableViewData
 				for dictionary in items{
 					let latestProd:LatestProduct = LatestProduct(dictionary: dictionary as! NSDictionary)
 					self.offerProduct.append(latestProd)
+				}
+				if self.offerProduct.count == 0{
+					self.offerTableView.isHidden = true
+					self.btnNoData.isHidden = false
 				}
 				self.offerTableView.reloadData()
 				

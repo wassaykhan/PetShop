@@ -21,6 +21,8 @@ class Product: NSObject {
 	var typeID:String?
 	var createdAt:String?
 	var fileImage:String?
+	var isConfig:String?
+	var itemID:Int?
 	
 	init(dictionary : NSDictionary){
 		self.id = dictionary["id"] as? Int
@@ -34,19 +36,38 @@ class Product: NSObject {
 		self.typeID = dictionary["type_id"] as? String
 		self.storeId = dictionary["store_id"] as? Int
 		self.createdAt = dictionary["created_at"] as? String
+		self.isConfig = dictionary["type_id"] as? String
 		var media:NSArray = []
 		if dictionary["media_gallery_entries"] != nil {
 			media = dictionary["media_gallery_entries"] as! NSArray
 		}
 		
+		
+		
 		var urlImageString = ""
 		if media.count > 0 {
-			let image = media[0] as! NSDictionary
-			let finalImage = image["file"] as! String
-			urlImageString = PBaseSUrl + "pub/media/catalog/product" + finalImage
 			
+			for item in media{
+				let itemDict = item as! NSDictionary
+				if let typeArr = itemDict["types"] as? NSArray{
+					if typeArr.count > 1{
+//						let image = media[0] as! NSDictionary
+						let finalImage = itemDict["file"] as! String
+						urlImageString = PBaseSUrl + "pub/media/catalog/product" + finalImage
+					}
+				}
+			}
 		}
 		self.fileImage = urlImageString
+		
+		//			if let typeArr = dic["types"] as? NSArray{
+		//				if typeArr.count > 0{
+		//
+		//				}
+		//			}
+		//			let image = media[0] as! NSDictionary
+		//			let finalImage = image["file"] as! String
+		//			urlImageString = PBaseSUrl + "pub/media/catalog/product" + finalImage
 		
 	}
 }

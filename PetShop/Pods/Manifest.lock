@@ -1,35 +1,55 @@
 PODS:
   - Alamofire (4.8.2)
+  - BadgeSwift (6.0.0)
   - ImageSlideshow (1.7.0):
     - ImageSlideshow/Core (= 1.7.0)
   - ImageSlideshow/Core (1.7.0)
   - ImageSlideshow/SDWebImage (1.7.0):
     - ImageSlideshow/Core
     - SDWebImage (< 5.0, >= 3.7)
+  - JVFloatLabeledTextField (1.2.1)
+  - Presentr (1.9)
+  - ScalingCarousel (2.4.1)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
   - SVProgressHUD (2.2.5)
+  - YNExpandableCell (1.2.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - BadgeSwift (~> 6.0)
   - ImageSlideshow (~> 1.4)
   - ImageSlideshow/SDWebImage
+  - JVFloatLabeledTextField
+  - Presentr
+  - ScalingCarousel
   - SVProgressHUD (~> 2.2)
+  - YNExpandableCell
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - BadgeSwift
     - ImageSlideshow
+    - JVFloatLabeledTextField
+    - Presentr
+    - ScalingCarousel
     - SDWebImage
     - SVProgressHUD
+    - YNExpandableCell
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  BadgeSwift: 69080f6776cb812b905d46effe8263600da1bdbd
   ImageSlideshow: f8eec5e37a980f60923b585ff23b0e140fd24018
+  JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
+  Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
+  ScalingCarousel: 2f8d7d7dc02a4aff33ad0ca4148f9b27b2c8f91c
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YNExpandableCell: f71457eddc5f2d607de5a2aef545325b0b7622e4
 
-PODFILE CHECKSUM: 747850a0cd12fe96f26e6687d5bc668229ea2849
+PODFILE CHECKSUM: a9bc89b089888deefd5d4a99a778d6bb1e404644
 
 COCOAPODS: 1.5.3

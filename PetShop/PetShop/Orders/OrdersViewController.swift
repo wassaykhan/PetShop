@@ -15,6 +15,14 @@ class OrdersViewController: UIViewController,UITableViewDelegate,UITableViewData
 	@IBOutlet weak var ordersTableView: UITableView!
 	var orderArr:Array<OrderDetail> = []
 	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		self.setStatusBarColor()
+	}
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.getOrders()
@@ -45,7 +53,7 @@ class OrdersViewController: UIViewController,UITableViewDelegate,UITableViewData
 		if Reachability.isConnectedToInternet() {
 			print("Yes! internet is available.")
 			
-			SVProgressHUD.show(withStatus: "Loading Request")
+			SVProgressHUD.show()
 			self.orderArr = []
 			let customerID = String(UserDefaults.standard.integer(forKey: "id"))
 			let urlString =  PBaseUrl + "orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=" + customerID + "&searchCriteria[filterGroups][0][filters][0][conditionType]=eq"
@@ -73,6 +81,9 @@ class OrdersViewController: UIViewController,UITableViewDelegate,UITableViewData
 			self.present(alert, animated: true, completion: nil)
 		}
 	}
+	
+	
+	
 	
 	//orderDetailID
 	

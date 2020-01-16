@@ -15,6 +15,5 @@ class Attributes: NSObject {
 	init(dictionary : NSDictionary){
 		self.value = dictionary["value"] as? String
 		self.label = dictionary["label"] as? String
-		
 	}
 }

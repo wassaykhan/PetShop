@@ -8,13 +8,17 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.init(red: 2/255, green: 166/255, blue: 178/255, alpha: 1)], for: UIControl.State.selected)
+			UITabBar.appearance().tintColor = UIColor.init(red: 2/255, green: 166/255, blue: 178/255, alpha: 1)
         // Do any additional setup after loading the view.
     }
+
+	
+
 	
 	override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 //		if tabBar.selectedItem == 3 {
